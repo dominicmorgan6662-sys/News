@@ -727,13 +727,18 @@
 
     const PROXY_OPTIONS = [
       // Vercel部署的服务端代理（推荐，无需任何安装）
-      { url: u => `https://wechat-article-tool.vercel.app/api/proxy?url=${encodeURIComponent(u)}`, label: 'vercel' },
+      { url: u => `https://news-nine-blond.vercel.app/api/proxy?url=${encodeURIComponent(u)}`, label: 'vercel' },
       // Local Python proxy (run: python proxy.py)
       { url: u => `http://localhost:51888/proxy?url=${encodeURIComponent(u)}`, local: true },
       // Public proxies (fallback)
       { url: u => `https://api.allorigins.win/get?url=${encodeURIComponent(u)}`, label: 'allorigins' },
       { url: u => `https://corsproxy.io/?${encodeURIComponent(u)}`, label: 'corsproxy' },
     ];
+
+    async function imgProxyUrl(rawSrc) {
+      if (!rawSrc || rawSrc.startsWith('data:') || rawSrc.startsWith('blob:') || rawSrc.startsWith('http') && !rawSrc.includes('mmbiz') && !rawSrc.includes('weixin.qq.com') && !rawSrc.includes('wx.qq.com')) return rawSrc;
+      return `https://news-nine-blond.vercel.app/api/proxy?url=${encodeURIComponent(rawSrc)}`;
+    }
 
     async function fetchViaProxy(url) {
       const errors = [];
@@ -797,6 +802,22 @@
 
         temp.querySelectorAll('[id*="watermark"], [class*="watermark"], script, style, .qr_code, .js_qr_code, [data-src*="qrcode"]').forEach(el => el.remove());
 
+        // First pass: collect img sources
+        const imgSrcs = [];
+        temp.querySelectorAll('img').forEach(img => {
+          const src = img.dataset.src || img.src;
+          if (src) imgSrcs.push(src);
+        });
+
+        // Proxy all image URLs
+        const proxiedSrcs = await Promise.all(imgSrcs.map(imgProxyUrl));
+
+        // Second pass: build Delta ops
+        const imgIdxMap = {};
+        temp.querySelectorAll('img').forEach((img, i) => {
+          imgSrcs[i] && (imgIdxMap[imgSrcs[i]] = proxiedSrcs[i]);
+        });
+
         const ops = [];
         const walk = (node) => {
           if (node.nodeType === Node.TEXT_NODE) {
@@ -805,7 +826,8 @@
           } else if (node.nodeType === Node.ELEMENT_NODE) {
             if (node.tagName === 'IMG') {
               const src = node.dataset.src || node.src;
-              if (src) ops.push({ insert: { image: src } });
+              const proxied = imgIdxMap[src] || src;
+              if (proxied) ops.push({ insert: { image: proxied } });
             } else {
               node.childNodes.forEach(walk);
               if (/^(P|DIV|BR)$/.test(node.tagName)) {
