@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳樽耀建设集团有限公司 · 股权穿透与背景尽职调查报告</title>
+<style>
+  :root{
+    --ink:#16202b; --muted:#6b7785; --line:#e4e9f0; --bg:#f5f7fa;
+    --brand:#123a5e; --brand2:#1f6fb2; --red:#b5322a; --amber:#b9741a;
+    --green:#1d7a4a; --card:#ffffff;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC","Helvetica Neue",Arial,sans-serif;
+    font-size:14px; line-height:1.75; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1040px; margin:0 auto; padding:0 28px 64px;}
+  header.hero{
+    background:linear-gradient(135deg,#0f2f4d 0%,#123a5e 45%,#1f6fb2 100%);
+    color:#fff; padding:46px 28px 40px; margin-bottom:0;
+  }
+  header.hero .wrap{padding-bottom:0;}
+  .eyebrow{font-size:12px; letter-spacing:.18em; opacity:.72; text-transform:uppercase;}
+  h1{font-size:30px; line-height:1.35; margin:10px 0 6px; font-weight:700; letter-spacing:.01em;}
+  .sub{font-size:14px; opacity:.8;}
+  .meta{display:flex; flex-wrap:wrap; gap:10px; margin-top:22px;}
+  .chip{
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+    padding:5px 12px; border-radius:999px; font-size:12.5px;
+  }
+  .verdict{
+    margin:26px 0 0; background:rgba(255,255,255,.1); border-left:3px solid #f2c14e;
+    padding:14px 18px; border-radius:0 6px 6px 0; font-size:14px;
+  }
+  .verdict b{color:#ffd97a;}
+  nav.toc{
+    background:var(--card); border:1px solid var(--line); border-radius:10px;
+    padding:14px 20px; margin:26px 0 30px; display:flex; flex-wrap:wrap; gap:6px 22px;
+    font-size:13px; box-shadow:0 1px 2px rgba(16,32,50,.04);
+  }
+  nav.toc a{color:var(--brand2); text-decoration:none; border-bottom:1px dashed transparent;}
+  nav.toc a:hover{border-bottom-color:var(--brand2);}
+  nav.toc span{color:var(--muted); font-size:12px; margin-right:4px;}
+  section{margin:0 0 40px;}
+  h2{
+    font-size:19px; margin:0 0 16px; padding-bottom:9px; border-bottom:2px solid var(--brand);
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h2 em{font-style:normal; font-size:12px; color:var(--muted); font-weight:400; letter-spacing:.08em;}
+  h3{font-size:15px; margin:22px 0 10px; color:var(--brand);}
+  p{margin:0 0 12px;}
+  .lead{font-size:14.5px;}
+  .kpi{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:0 0 8px;}
+  .kpi .box{
+    background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px 16px 14px;
+    box-shadow:0 1px 2px rgba(16,32,50,.04);
+  }
+  .kpi .num{font-size:23px; font-weight:700; color:var(--brand); line-height:1.2;}
+  .kpi .num small{font-size:12px; font-weight:500; color:var(--muted); margin-left:2px;}
+  .kpi .lab{font-size:12.5px; color:var(--muted); margin-top:4px;}
+  table{width:100%; border-collapse:collapse; margin:10px 0 18px; font-size:13px; background:var(--card);}
+  thead th{
+    background:#eef3f8; color:#2b445c; text-align:left; font-weight:600;
+    padding:9px 10px; border-bottom:1px solid var(--line); white-space:nowrap;
+  }
+  tbody td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  tbody tr:last-child td{border-bottom:none;}
+  tbody tr:nth-child(even) td{background:#fbfcfe;}
+  table.tight td, table.tight th{padding:7px 9px;}
+  .tag{
+    display:inline-block; padding:1px 8px; border-radius:4px; font-size:11.5px; font-weight:600;
+    white-space:nowrap;
+  }
+  .t-red{background:#fbe9e7; color:var(--red);}
+  .t-amber{background:#fdf1de; color:var(--amber);}
+  .t-green{background:#e7f4ec; color:var(--green);}
+  .t-blue{background:#e8f0f8; color:var(--brand2);}
+  .t-grey{background:#eff1f4; color:var(--muted);}
+  .num-red{color:var(--red); font-weight:700;}
+  .num-amber{color:var(--amber); font-weight:700;}
+
+  /* 股权结构图 */
+  .chart{
+    background:var(--card); border:1px solid var(--line); border-radius:12px;
+    padding:28px 20px 20px; margin:8px 0 20px;
+  }
+  .nodes{display:flex; justify-content:center; gap:14px; flex-wrap:wrap;}
+  .node{
+    border:1px solid var(--line); border-radius:10px; background:#fff; padding:10px 16px;
+    text-align:center; min-width:150px; box-shadow:0 1px 2px rgba(16,32,50,.05);
+  }
+  .node strong{display:block; font-size:13.5px;}
+  .node span{font-size:11.5px; color:var(--muted);}
+  .node.person{border-color:#c9d8e6; background:#f4f8fc;}
+  .node.core{border:2px solid var(--brand); background:#f7fbff;}
+  .node.core strong{color:var(--brand);}
+  .conn{text-align:center; color:#9fb0c2; font-size:12px; margin:6px 0; letter-spacing:.1em;}
+  .branch{
+    border-top:1px solid #cfd9e4; margin:6px auto 0; padding-top:16px; max-width:880px;
+    display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
+  }
+  .note{font-size:12px; color:var(--muted); margin-top:10px;}
+  .callout{
+    background:#f7fafd; border:1px solid #dbe6f1; border-left:3px solid var(--brand2);
+    border-radius:0 8px 8px 0; padding:13px 16px; margin:14px 0; font-size:13.3px;
+  }
+  .callout.warn{background:#fdf6ee; border-color:#f0dcc0; border-left-color:var(--amber);}
+  .callout.danger{background:#fdf0ee; border-color:#f1d3ce; border-left-color:var(--red);}
+  .callout b{color:var(--brand);}
+  ul.clean{margin:6px 0 14px; padding-left:20px;}
+  ul.clean li{margin-bottom:7px;}
+  .risk-item{
+    border:1px solid var(--line); border-radius:10px; background:var(--card);
+    padding:15px 18px; margin-bottom:12px;
+  }
+  .risk-item .head{display:flex; align-items:center; gap:10px; margin-bottom:6px;}
+  .risk-item .head .idx{
+    width:22px; height:22px; border-radius:50%; background:var(--brand); color:#fff;
+    font-size:12px; display:flex; align-items:center; justify-content:center; flex:none;
+  }
+  .risk-item .head b{font-size:14px;}
+  .risk-item p{margin:0; font-size:13.2px; color:#39485a;}
+  .bars{display:flex; gap:10px; flex-wrap:wrap; margin:8px 0 4px;}
+  .bar{flex:1; min-width:150px; background:#f0f3f7; border-radius:6px; padding:10px 12px;}
+  .bar .v{font-size:18px; font-weight:700;}
+  .bar .k{font-size:11.5px; color:var(--muted);}
+  footer{
+    border-top:1px solid var(--line); margin-top:10px; padding-top:18px;
+    font-size:12px; color:var(--muted);
+  }
+  @media (max-width:720px){
+    .kpi{grid-template-columns:repeat(2,1fr);}
+    h1{font-size:23px;}
+    .wrap{padding:0 16px 48px;}
+    table{font-size:12px;}
+    thead th, tbody td{padding:7px;}
+  }
+  @media print{
+    body{background:#fff;}
+    header.hero{padding:28px 0 24px;}
+    nav.toc{display:none;}
+    section{break-inside:avoid;}
+    .kpi .box, .chart, .risk-item{box-shadow:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Equity Penetration &amp; Background Due Diligence</div>
+    <h1>深圳樽耀建设集团有限公司<br>股权穿透与背景尽职调查报告</h1>
+    <div class="sub">统一社会信用代码 91440300MA5HW7F00W · 深圳市罗湖区 · 房屋建筑业</div>
+    <div class="meta">
+      <span class="chip">报告日期 2026-10-30</span>
+      <span class="chip">数据来源 企查查（工商 / 股权 / 风险 / 资质 / 招投标 / 年报）</span>
+      <span class="chip">穿透层数 4 层 · 16 家在营主体 · 3 名自然人</span>
+    </div>
+    <div class="verdict">
+      <b>核心结论：</b>该公司是江苏南通“樽瑞—铭樽”建筑系于 2023 年在深圳设立的法人独资施工平台，实际控制人为耿美英（穿透持股 51%、表决权 100%），团队具南通华荣建设系履历。企业自身无诉讼与处罚记录，但存在<b>安全生产许可证过期、大额减资、用工规模持续收缩、财务不公示</b>四项关键瑕疵；实控人网络中的江苏金通灵储能已进入破产程序。建议<b>“有条件合作、先核证后签约”</b>。
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <span>目录</span>
+  <a href="#s1">一、标的本体</a>
+  <a href="#s2">二、股权穿透</a>
+  <a href="#s3">三、上游控股平台</a>
+  <a href="#s4">四、关键自然人</a>
+  <a href="#s5">五、关联企业全景</a>
+  <a href="#s6">六、重大风险事项</a>
+  <a href="#s7">七、结论与行动清单</a>
+  <a href="#s8">八、数据口径</a>
+</nav>
+
+<section id="s1">
+  <h2>一、标的本体<em>COMPANY PROFILE</em></h2>
+
+  <div class="kpi">
+    <div class="box"><div class="num">4,000<small>万元</small></div><div class="lab">注册资本（已全额实缴）</div></div>
+    <div class="box"><div class="num">16<small>人</small></div><div class="lab">2025 年报参保人数</div></div>
+    <div class="box"><div class="num">3<small>年</small></div><div class="lab">成立至今（2023-05-16）</div></div>
+    <div class="box"><div class="num">0<small>/35</small></div><div class="lab">企业风险因子命中数</div></div>
+  </div>
+
+  <table>
+    <tbody>
+      <tr><td style="width:120px;color:var(--muted)">企业名称</td><td>深圳樽耀建设集团有限公司（简称“樽耀建设”）</td></tr>
+      <tr><td style="color:var(--muted)">统一社会信用代码</td><td>91440300MA5HW7F00W</td></tr>
+      <tr><td style="color:var(--muted)">成立日期</td><td>2023-05-16（营业期限至无固定期限）</td></tr>
+      <tr><td style="color:var(--muted)">注册资本 / 实缴</td><td>4,000 万元 / 4,000 万元（2024-12-31 缴足，实缴率 100%）</td></tr>
+      <tr><td style="color:var(--muted)">企业类型</td><td>有限责任公司（法人独资）</td></tr>
+      <tr><td style="color:var(--muted)">法定代表人</td><td>韩建锋（经理，不持股，无其他关联企业）</td></tr>
+      <tr><td style="color:var(--muted)">董监高</td><td>朱敏（董事）、朱锋（监事）、韩建锋（经理）</td></tr>
+      <tr><td style="color:var(--muted)">注册地址</td><td>深圳市罗湖区翠竹街道翠平社区田贝一路 23 号文锦广场文安中心 2503</td></tr>
+      <tr><td style="color:var(--muted)">国标行业</td><td>建筑业 — 房屋建筑业 — 住宅房屋建筑</td></tr>
+      <tr><td style="color:var(--muted)">登记机关</td><td>深圳市市场监督管理局（核准日期 2026-07-09）</td></tr>
+      <tr><td style="color:var(--muted)">经营状态</td><td><span class="tag t-green">存续（在营、开业、在册）</span></td></tr>
+      <tr><td style="color:var(--muted)">对外投资 / 分支机构</td><td>均为 0；无官网、无网店、无对外担保</td></tr>
+      <tr><td style="color:var(--muted)">年报公示</td><td>2023 / 2024 / 2025 三期均已公示；资产总额、营业总收入、净利润、纳税总额<b>全部选择不公示</b></td></tr>
+    </tbody>
+  </table>
+
+  <h3>工商沿革</h3>
+  <table class="tight">
+    <thead><tr><th style="width:120px">日期</th><th>事项</th><th style="width:38%">内容</th></tr></thead>
+    <tbody>
+      <tr><td>2023-05-16</td><td>设立</td><td>注册资本 4,000 万元，股东南通铭樽 100%</td></tr>
+      <tr><td>2023-05-31</td><td>地址变更</td><td>由罗湖商务中心 201-9 单元迁至文锦广场文安中心 2503</td></tr>
+      <tr><td>2023-08-25</td><td>取得安许证</td><td>（粤）JZ安许证字[2023]029671，有效期至 2026-08-25</td></tr>
+      <tr><td>2024-04-03</td><td>取得资质</td><td>建筑工程施工总承包二级（有效期至 2029-04-03）</td></tr>
+      <tr><td>2024-09-30</td><td>增资 + 治理调整</td><td>注册资本 4,000 万 → 10,000 万元；朱敏任董事；韩建锋由总经理改任经理</td></tr>
+      <tr><td>2024-12-25</td><td>取得许可</td><td>食品经营许可证（至 2029-12-24，与建筑主业无关）</td></tr>
+      <tr><td>2025-01-02</td><td>体系认证</td><td>质量 / 环境 / 职业健康安全三体系（至 2028-01-01）</td></tr>
+      <tr><td>2026-07-09</td><td><b>减资</b></td><td>注册资本 10,000 万 → 4,000 万元（-6,000 万，全部为未实缴认缴额）</td></tr>
+      <tr><td>2026-08-25</td><td><b>安许证到期</b></td><td>系统状态：过期失效</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section id="s2">
+  <h2>二、股权穿透<em>OWNERSHIP CHAIN</em></h2>
+
+  <div class="chart">
+    <div class="nodes">
+      <div class="node person"><strong>耿美英</strong><span>51% · 实际控制人</span></div>
+      <div class="node person"><strong>朱　锋</strong><span>29% · 监事</span></div>
+      <div class="node person"><strong>朱　敏</strong><span>20% · 董事</span></div>
+    </div>
+    <div class="conn">│　│　│　（合计 100%，实缴 4,036.33 / 5,000 万元）</div>
+    <div class="nodes">
+      <div class="node"><strong>南通铭樽企业管理有限公司</strong><span>91320602MACHAQUT8W · 5,000 万元 · 参保 0 人</span></div>
+    </div>
+    <div class="conn">▼　100%（法人独资）</div>
+    <div class="nodes">
+      <div class="node core"><strong>深圳樽耀建设集团有限公司</strong><span>4,000 万元 · 实缴 100% · 参保 16 人</span></div>
+    </div>
+    <div class="note">穿透结果：耿美英对深圳樽耀<br>
+      <b>总持股 51%，表决权 100%</b>；受益所有人（AML 口径）为耿美英 51%、朱锋 29%。
+    </div>
+  </div>
+
+  <table class="tight">
+    <thead><tr><th>层级</th><th>主体 / 自然人</th><th>持股比例</th><th>表决权</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>L1</td><td>南通铭樽企业管理有限公司</td><td>100%</td><td>100%</td><td>唯一股东，认缴 4,000 万、实缴 4,000 万</td></tr>
+      <tr><td>L2</td><td>耿美英</td><td>51%</td><td>51%</td><td>铭樽第一大股东，登记职务为监事</td></tr>
+      <tr><td>L2</td><td>朱锋</td><td>29%</td><td>29%</td><td>铭樽股东，樽耀监事</td></tr>
+      <tr><td>L2</td><td>朱敏</td><td>20%</td><td>20%</td><td>铭樽法定代表人/执行董事，樽耀董事</td></tr>
+      <tr><td>穿透</td><td><b>耿美英</b></td><td><b>51%</b></td><td><b>100%</b></td><td>相对控股 + 全资子公司，形成表决权放大</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <b>结构特征：</b>铭樽自 2023-05-05 成立至今无股东、注册资本、地址变更，股权结构稳定；三名自然人的认缴出资到期日均为 2043-05-04，其中耿美英尚有 963.67 万元未实缴，平台层面实缴率 80.7%。
+  </div>
+</section>
+
+<section id="s3">
+  <h2>三、上游控股平台：南通铭樽<em>HOLDING PLATFORM</em></h2>
+
+  <p class="lead">铭樽注册于南通崇川区，行业归类“商务服务业”，<b>参保 0 人</b>，为典型纯持股平台，向下控制 5 家企业，形成跨江苏、广东、海南的资本布局。</p>
+
+  <table>
+    <thead><tr><th>被投企业</th><th>持股</th><th>认缴</th><th>成立</th><th>地区</th><th>定位</th></tr></thead>
+    <tbody>
+      <tr><td>深圳樽耀建设集团</td><td>100%</td><td>4,000 万</td><td>2023-05</td><td>广东深圳</td><td>华南施工平台（标的）</td></tr>
+      <tr><td>江苏佩苏科技</td><td>100%</td><td>6,000 万</td><td>2024-12</td><td>江苏南京</td><td>科技 / AI / 物联网</td></tr>
+      <tr><td>南京云脉数智</td><td>100%</td><td>3,000 万</td><td>2025-11</td><td>江苏南京</td><td>信息系统集成</td></tr>
+      <tr><td>海南恒博卓越进出口</td><td>99%</td><td>198 万</td><td>2025-09</td><td>海南海口</td><td>贸易 / 酒类</td></tr>
+      <tr><td>南通恒聚设备租赁</td><td>50%</td><td>500 万</td><td>2022-03</td><td>江苏南通</td><td>建筑设备租赁（配套）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout warn">
+    <b>扩张节奏：</b>2024-12 至 2025-11 一年内新增佩苏、恒博、云脉三家全资或控股主体，方向分别为科技、贸易、数智，均与建筑主业无关；三家均参保 0 人、实缴比例偏低（佩苏 100%、云脉 16.7%、恒博未实缴），呈现“先设壳、后备业”的布局特征。
+  </div>
+
+  <h3>同源主平台：南通樽瑞建设集团（非铭樽下属）</h3>
+  <table class="tight">
+    <thead><tr><th>项目</th><th>内容</th></tr></thead>
+    <tbody>
+      <tr><td style="width:130px;color:var(--muted)">统一社会信用代码</td><td>91320600MA26EG364H · 成立 2021-07-01</td></tr>
+      <tr><td style="color:var(--muted)">注册资本 / 实缴</td><td>5,000 万元 / 2,661 万元</td></tr>
+      <tr><td style="color:var(--muted)">股东</td><td>耿美英 80% + 朱敏 20%</td></tr>
+      <tr><td style="color:var(--muted)">法定代表人 / 参保</td><td>黄明 / 14 人</td></tr>
+      <tr><td style="color:var(--muted)">注册地址</td><td>南通市崇川区濠西路 109 号尚德城邦 19 幢 1006 室</td></tr>
+      <tr><td style="color:var(--muted)">风险扫描</td><td><span class="tag t-green">35 项全零</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">樽瑞与樽耀由同一实控人耿美英控制、经营范围高度重叠，但股权上互不隶属，构成同一控制人下的“同业双主体”，项目归属与人员资质缺乏公开隔离机制。</p>
+</section>
+
+<section id="s4">
+  <h2>四、关键自然人<em>KEY INDIVIDUALS</em></h2>
+
+  <p class="lead">三名核心人物在 18 项个人风险维度（失信、被执行、限高、限制出境、裁判文书、股权冻结、行政处罚、税收违法等）上<b>全部为零命中</b>，无个人负面记录。</p>
+
+  <h3>耿美英 · 实际控制人</h3>
+  <table class="tight">
+    <thead><tr><th>企业</th><th>角色 / 持股</th><th>注册资本</th><th>状态</th></tr></thead>
+    <tbody>
+      <tr><td>南通铭樽企业管理</td><td>股东 51% · 监事</td><td>5,000 万</td><td>存续</td></tr>
+      <tr><td>南通樽瑞建设集团</td><td>股东 80%</td><td>5,000 万</td><td>在业</td></tr>
+      <tr><td>南通诚志建筑工程配套</td><td>股东 20%（2026-10-23 起）</td><td>600 万</td><td>存续</td></tr>
+      <tr><td>南通高筑贸易</td><td>股东 80%</td><td>500 万</td><td>已注销</td></tr>
+    </tbody>
+  </table>
+  <p class="note">间接持股：深圳樽耀 51%、江苏佩苏 51%、南京云脉 51%、海南恒博 50.49%、南通恒聚 25.5%。在 9 家企业被识别为受益所有人，其中 5 家同时认定为实际控制人。2026-10-23 新受让诚志 20% 股权，为最近一次股权动作。</p>
+
+  <h3>朱锋 · 产业投资与科技板块</h3>
+  <table class="tight">
+    <thead><tr><th>企业</th><th>持股 / 角色</th><th>注册资本</th><th>风险命中</th></tr></thead>
+    <tbody>
+      <tr><td>南通铭樽企业管理</td><td>29%</td><td>5,000 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>江苏金通灵储能科技</td><td>18%</td><td>3,000 万</td><td><span class="tag t-red">7 项</span></td></tr>
+      <tr><td>南通华荣建设集团建材科技</td><td>19% · 监事</td><td>1,800 万</td><td><span class="tag t-amber">3 项</span></td></tr>
+      <tr><td>南通众盈建筑工程</td><td>20% · 监事</td><td>1,000 万</td><td><span class="tag t-amber">5 项</span></td></tr>
+      <tr><td>江苏佩苏科技</td><td>法定代表人 / 执行董事（无直接持股）</td><td>6,000 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南通诚志建筑工程配套</td><td>20% · 经理</td><td>600 万</td><td><span class="tag t-amber">5 项</span></td></tr>
+      <tr><td>深圳市茶链汇创科技合伙</td><td>16.0003%（LP）</td><td>1,000 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南京滴嫂企业管理</td><td>20%</td><td>200 万</td><td><span class="tag t-green">0</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">关联企业共 17 家，另 4 家已注销（藤力建材 30%、力汇建筑配套 30%、天赢投资 10%、上海怡好投资 20%，注销时间集中在 2015—2019 年）。间接持股：深圳樽耀 29%、佩苏 29%、云脉 29%、恒博 28.71%、恒聚 14.5%、深圳茶链科技 11.561%。最早投资可追溯至 2002 年，曾任南通华荣建设集团泰州分公司负责人。</p>
+
+  <h3>朱敏 · 法定代表人 / 经营执行</h3>
+  <table class="tight">
+    <thead><tr><th>企业</th><th>持股 / 角色</th><th>注册资本 / 实缴</th><th>风险命中</th></tr></thead>
+    <tbody>
+      <tr><td>南通宇越贸易</td><td>95% · 法定代表人</td><td>500 万 / 208 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南通铭樽企业管理</td><td>20% · 法定代表人/执行董事</td><td>5,000 万 / 4,036.33 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南通恒聚设备租赁</td><td>57.5%（间接/实控）· 执行董事</td><td>1,000 万 / 242 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南通樽瑞建设集团</td><td>20%</td><td>5,000 万 / 2,661 万</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>南通泓臻档案管理</td><td>49% · 监事</td><td>50 万 / 未实缴</td><td><span class="tag t-green">0</span></td></tr>
+      <tr><td>海南恒博卓越进出口</td><td>1%</td><td>200 万 / 未公示</td><td><span class="tag t-green">0</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">关联企业共 12 家；现任南通华荣建设集团上海分公司负责人（在业）。为三名核心人物中唯一在深圳、南通两地均任法定代表人者，实际掌握签署与经营。</p>
+
+  <div class="callout">
+    <b>治理观察：</b>法定代表人普遍由非股东担任——云脉（蒋晨亮）、恒博（陈燕）、滴嫂（陈亮）、泓臻（陈泳）、茶链（刘韩）、金通灵储能（季维东）、华荣建材（陆峰）、众盈（叶素琴）、诚志与樽瑞（黄明）。这是“股东隐身、法代担责”的常见安排，意味着签约对手未必是有决策权的人，合同宜要求实控人或铭樽提供担保。
+  </div>
+</section>
+
+<section id="s5">
+  <h2>五、关联企业全景与风险分层<em>NETWORK &amp; RISK MATRIX</em></h2>
+
+  <h3>在营主体（16 家）</h3>
+  <table>
+    <thead><tr><th>企业</th><th>归属</th><th>成立</th><th>注册资本/实缴</th><th>参保</th><th>风险命中</th><th>等级</th></tr></thead>
+    <tbody>
+      <tr><td>江苏金通灵储能科技</td><td>朱锋 18%</td><td>2018-01</td><td>3,000 / 1,530 万</td><td>2</td><td class="num-red">7 项</td><td><span class="tag t-red">红</span></td></tr>
+      <tr><td>南通众盈建筑工程</td><td>朱锋 20%</td><td>2018-11</td><td>1,000 / 1,000 万</td><td>1</td><td class="num-amber">5 项</td><td><span class="tag t-amber">橙</span></td></tr>
+      <tr><td>南通华荣建材科技</td><td>朱锋 19%</td><td>2017-03</td><td>1,800 / 1,800 万</td><td>8</td><td class="num-amber">3 项</td><td><span class="tag t-amber">橙</span></td></tr>
+      <tr><td>南通诚志建筑配套</td><td>耿 20 / 锋 20 / 敏 20</td><td>2014-03</td><td>600 / 600 万</td><td>5</td><td class="num-amber">5 项</td><td><span class="tag t-amber">黄</span></td></tr>
+      <tr><td>深圳茶链科技</td><td>朱锋间接 11.561%</td><td>2019-09</td><td>1,190.48 / 510.48 万</td><td>3</td><td class="num-amber">1 项</td><td><span class="tag t-amber">黄</span></td></tr>
+      <tr><td>深圳樽耀建设集团</td><td>标的</td><td>2023-05</td><td>4,000 / 4,000 万</td><td>16</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南通铭樽企业管理</td><td>控股平台</td><td>2023-05</td><td>5,000 / 4,036.33 万</td><td>0</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南通樽瑞建设集团</td><td>耿 80 / 敏 20</td><td>2021-07</td><td>5,000 / 2,661 万</td><td>14</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>江苏佩苏科技</td><td>铭樽 100%</td><td>2024-12</td><td>6,000 / 6,000 万</td><td>0</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南京云脉数智</td><td>铭樽 100%</td><td>2025-11</td><td>3,000 / 500 万</td><td>0</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>海南恒博卓越进出口</td><td>铭樽 99 / 敏 1</td><td>2025-09</td><td>200 / 未公示</td><td>0</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南通恒聚设备租赁</td><td>敏 57.5% / 铭樽 50%</td><td>2022-03</td><td>1,000 / 242 万</td><td>1</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南通宇越贸易</td><td>敏 95%</td><td>2011-11</td><td>500 / 208 万</td><td>1</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南通泓臻档案管理</td><td>敏 49%</td><td>2021-02</td><td>50 / 未实缴</td><td>3</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>南京滴嫂企业管理</td><td>锋 20%</td><td>2025-07</td><td>200 / 159.9 万</td><td>1</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+      <tr><td>深圳茶链汇创（有限合伙）</td><td>锋 16.0003%</td><td>2021-07</td><td>1,000 / 未公示</td><td>0</td><td>0</td><td><span class="tag t-green">绿</span></td></tr>
+    </tbody>
+  </table>
+
+  <h3>已注销主体（6 家，风险扫描未获取）</h3>
+  <table class="tight">
+    <thead><tr><th>企业</th><th>原持股人</th><th>原持股</th><th>注销时间 / 区域</th></th></thead>
+    <tbody>
+      <tr><td>南通高筑贸易</td><td>耿美英 / 朱敏</td><td>80% / 20%</td><td>2022-09 / 江苏</td></tr>
+      <tr><td>南通藤力建筑材料</td><td>朱锋</td><td>30%</td><td>2019-06 / 江苏</td></tr>
+      <tr><td>南通力汇建筑工程配套</td><td>朱锋</td><td>30%</td><td>2019-06 / 江苏</td></tr>
+      <tr><td>南通天赢投资咨询</td><td>朱锋</td><td>10%</td><td>2019-12 / 江苏</td></tr>
+      <tr><td>上海怡好投资管理</td><td>朱锋</td><td>20%</td><td>2015-08 / 上海</td></tr>
+      <tr><td>江苏昭讯建筑劳务</td><td>朱锋（间接）</td><td>20%</td><td>已注销 / 江苏镇江</td></tr>
+    </tbody>
+  </table>
+  <p class="note">上述 6 家主体登记状态为注销，本轮接口未返回其 35 项风险扫描结果；注销时间集中于 2015—2022 年，属正常出清，未见异常集中注销迹象，但历史债务仍建议以个人核查补充。</p>
+
+  <div class="callout warn">
+    <b>“干净资产”与“历史包袱”分层：</b>施工与控股主线（樽瑞、樽耀、铭樽）风险全零；问题集中于朱锋参股的三家老主体（金通灵储能、众盈、华荣建材）及耿美英刚介入的诚志。隔离意图明显，但朱锋个人横跨两侧，存在个人层面的风险传导通道。
+  </div>
+</section>
+
+<section id="s6">
+  <h2>六、重大风险事项<em>KEY FINDINGS</em></h2>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">1</span><b>安全生产许可证已过期失效</b><span class="tag t-red">高</span></div>
+    <p>证书（粤）JZ安许证字[2023]029671 有效期至 2026-08-25，系统显示“过期失效”，距报告日已逾 2 个月。总包二级企业无有效安许证即不得承接施工，直接影响业务连续性。可能已续期但数据未同步，须索取新证原件核验。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">2</span><b>大额减资：1 亿元 → 4,000 万元</b><span class="tag t-amber">中高</span></div>
+    <p>2024-09-30 由 4,000 万增至 10,000 万，2026-07-09 又减回 4,000 万，削减的 6,000 万元全部为未实缴认缴额，实缴始终为 4,000 万元——<b>不是抽逃已缴资本</b>，属“挤出认缴水分”。但减资须履行债权人公告程序，应核查公告是否满 45 日、有无债权人异议及债务清偿担保安排。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">3</span><b>用工规模两年下降 63%</b><span class="tag t-amber">中</span></div>
+    <p>参保人数 2023 年 43 人 → 2024 年 18 人 → 2025 年 16 人，与“建设集团”名义不匹配。按 16 人配置承担总包二级项目，需核实项目经理、建造师注册在册人数及是否存在劳务分包依赖。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">4</span><b>财务完全不透明</b><span class="tag t-amber">中高</span></div>
+    <p>2023—2025 三期年报的资产总额、所有者权益、营业总收入、利润总额、净利润、纳税总额<b>全部选择不公示</b>，无法从公开渠道判断经营规模与偿债能力。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">5</span><b>业务证据薄弱</b><span class="tag t-amber">中</span></div>
+    <p>全库仅 2 条招投标记录，均为 2024-06-20 罗湖区翠竹街道办的“田苑小区围墙修缮”“翠苑大厦北面环境提升”<b>资格审查公示</b>，无中标单位、无中标金额。公开渠道缺少可验证的中标合同与工程业绩。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">6</span><b>关联交易闭环与同业竞争</b><span class="tag t-amber">中高</span></div>
+    <p>朱敏 95% 的宇越贸易（建材 + 钢管扣件塔吊租赁）、57.5% 的恒聚设备租赁、三人共持的诚志建筑配套、49% 的泓臻档案，均可直接向樽耀供货、出租设备与承接工程档案；耿美英同时控股南通樽瑞（80%）与深圳樽耀（51%），两主体经营范围高度重叠。真实成本与利润归属难以通过公开数据判断。</p>
+  </div>
+
+  <div class="risk-item">
+    <div class="head"><span class="idx">7</span><b>实控人网络的破产传导</b><span class="tag t-red">高</span></div>
+    <p>朱锋持股 18% 的江苏金通灵储能科技已由崇川区人民法院受理破产（（2025）苏0602破50号，申请人江苏赛德力制药机械制造有限公司），并附司法拍卖 29 项、担保信息 8 项、股权出质 4 项、欠税 2 项。朱锋所持股权大概率面临清零或清算分配，其是否为担保方、所持份额是否已质押，须单独核查。</p>
+  </div>
+
+  <div class="bars">
+    <div class="bar"><div class="v" style="color:var(--red)">7 项</div><div class="k">金通灵储能风险维度</div></div>
+    <div class="bar"><div class="v" style="color:var(--amber)">47 次</div><div class="k">众盈建筑开庭公告</div></div>
+    <div class="bar"><div class="v" style="color:var(--amber)">18 次</div><div class="k">华荣建材开庭公告</div></div>
+    <div class="bar"><div class="v" style="color:var(--brand)">0 项</div><div class="k">标的自身 35 项风险</div></div>
+  </div>
+</section>
+
+<section id="s7">
+  <h2>七、结论与行动清单<em>CONCLUSION &amp; NEXT STEPS</em></h2>
+
+  <p class="lead"><b>性质判断：</b>2023 年新设、南通“樽瑞—铭樽”系在深圳的法人独资施工平台，团队 16 人、总包二级资质、实控人耿美英。属“区域建筑集团在深设立的项目型平台”，规模中小，工商记录干净，但资质连续性与财务透明度是主要短板。</p>
+
+  <h3>建议动作（按优先级）</h3>
+  <table>
+    <thead><tr><th style="width:36px">#</th><th>动作</th><th>目的</th></th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>索取安全生产许可证续期原件，核对有效期与许可范围</td><td>确认能否合法承接施工</td></tr>
+      <tr><td>2</td><td>调取 2026-07 减资的债权人公告、债务清偿或担保文件</td><td>判断减资程序是否合规、有无债务异议</td></tr>
+      <tr><td>3</td><td>要求提供近三年施工合同、结算单、在建项目清单与竣工验收资料</td><td>弥补公开业绩空白</td></tr>
+      <tr><td>4</td><td>核查朱锋在金通灵储能的股权质押、担保责任与破产债权申报情况</td><td>评估个人信用与传导风险</td></tr>
+      <tr><td>5</td><td>索取宇越贸易、恒聚租赁、诚志配套、泓臻档案与樽耀的交易台账及定价依据</td><td>识别关联交易占比与公允性</td></tr>
+      <tr><td>6</td><td>明确与南通樽瑞的同业竞争边界、项目经理与建造师注册归属</td><td>防止项目与利润被归集至主平台</td></tr>
+      <tr><td>7</td><td>要求铭樽或耿美英提供担保，并约定资金归集限制</td><td>弥补签约人非决策人的治理缺陷</td></tr>
+      <tr><td>8</td><td>索取审计报告或银行流水，替代不公示的年报数据</td><td>验证真实经营规模与偿债能力</td></tr>
+      <tr><td>9</td><td>核查诚志 2026-10-23 股权转让对价，及其欠税金额、劳动仲裁事由</td><td>评估耿美英新介入主体的或有负债</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout danger">
+    <b>一句话结论：</b>工商层面“干净但单薄”，股权层面“清晰但放大”，风险层面“标的安全、网络有雷”。可进入商务谈判，但<b>不宜在安许证续期、减资公告、关联交易三项核证完成前签署实质合同或支付预付款</b>。
+  </div>
+</section>
+
+<section id="s8">
+  <h2>八、数据口径与免责<em>METHODOLOGY</em></h2>
+  <ul class="clean">
+    <li><b>数据来源：</b>企查查工商登记、股权穿透、受益所有人、主要人员、对外投资、变更记录、资质证书、招投标、企业年报、企业风险扫描（35 项）及个人风险扫描（18 项）；查询日 2026-10-30。</li>
+    <li><b>穿透口径：</b>实际控制人与受益所有人比例采用服务端穿透引擎聚合终值，未以各层比例相乘自行重构；表内“间接持股”为引擎给定值。</li>
+    <li><b>风险口径：</b>风险计数为各维度命中条目数的聚合终值，未跨维求和。除金通灵储能破产重整已逐条下钻外，诚志的欠税与劳动仲裁、茶链科技的行政处罚仅取计数，未取明细。</li>
+    <li><b>已知缺口：</b>① 6 家已注销主体未取得风险扫描结果；② 年报财务数据全部不公示；③ 无公开中标金额与工程业绩；④ 涉及“华荣建设系履历”“同业双主体”等为基于关联任职关系的合理推断，非登记在册的直接股权关系。</li>
+    <li><b>免责：</b>本报告基于公开工商与司法数据编制，不构成法律、财务或投资意见；关键结论应通过访谈、合同、审计报告与现场核查复核。</li>
+  </ul>
+</section>
+
+<footer>
+  报告编制：基于企查查公开数据 · 2026-10-30 · 共核查 16 家在营主体、6 家已注销主体、3 名关键自然人及 1 名法定代表人
+</footer>
+
+</div>
+</body>
+</html>
