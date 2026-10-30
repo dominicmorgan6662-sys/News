@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>深圳樽耀系族 · 资质证书失效原因分析报告</title>
+<style>
+  :root{
+    --ink:#17202a; --muted:#5b6b7c; --line:#e2e8ee; --bg:#f6f8fa; --card:#ffffff;
+    --accent:#0f5f73; --accent2:#147d8f; --warn:#b3541e; --danger:#b3261e; --ok:#1e7a4c;
+    --amber:#a56a00;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,-apple-system,sans-serif;
+    line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;}
+  .page{max-width:1080px;margin:0 auto;padding:0 28px 64px;}
+  header.hero{background:linear-gradient(135deg,#0c4a57 0%,#0f5f73 45%,#147d8f 100%);color:#fff;
+    padding:54px 28px 44px;margin:0 -28px 40px;}
+  header.hero .inner{max-width:1024px;margin:0 auto;}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.78;margin-bottom:14px;}
+  h1{font-size:30px;line-height:1.35;margin:0 0 14px;font-weight:650;letter-spacing:-.01em;}
+  .sub{font-size:14.5px;opacity:.86;max-width:760px;margin:0;}
+  .meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 22px;font-size:12.5px;opacity:.85;}
+  .meta span{white-space:nowrap;}
+  h2{font-size:19px;margin:44px 0 14px;padding-left:12px;border-left:4px solid var(--accent);font-weight:650;}
+  h3{font-size:15.5px;margin:26px 0 8px;color:var(--accent);font-weight:600;}
+  p{margin:10px 0;}
+  .lead{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:0 0 8px;}
+  .lead ol{margin:6px 0 0;padding-left:20px;}
+  .lead li{margin:8px 0;}
+  .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 6px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 16px 14px;}
+  .card .num{font-size:26px;font-weight:700;line-height:1.2;color:var(--accent);}
+  .card .num.bad{color:var(--danger);}
+  .card .lbl{font-size:12.5px;color:var(--muted);margin-top:4px;}
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);
+    border-radius:8px;overflow:hidden;font-size:13.5px;margin:12px 0;}
+  th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:#eef3f6;font-weight:600;color:#2c3e50;font-size:12.5px;letter-spacing:.02em;}
+  tr:last-child td{border-bottom:none;}
+  .tag{display:inline-block;padding:2px 8px;border-radius:999px;font-size:11.5px;font-weight:600;white-space:nowrap;}
+  .t-ok{background:#e3f4ea;color:var(--ok);}
+  .t-exp{background:#fdf0e3;color:var(--amber);}
+  .t-rev{background:#fbe6e4;color:var(--danger);}
+  .t-na{background:#eef1f4;color:var(--muted);}
+  .bar-wrap{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:12px 0;}
+  .bar-row{display:grid;grid-template-columns:150px 1fr 44px;align-items:center;gap:12px;margin:7px 0;font-size:13px;}
+  .bar{height:14px;border-radius:4px;background:linear-gradient(90deg,var(--accent2),var(--accent));}
+  .bar.zero{background:#e3e8ec;}
+  .bar-val{color:var(--muted);text-align:right;font-variant-numeric:tabular-nums;}
+  .timeline{position:relative;margin:16px 0 8px;padding-left:26px;}
+  .timeline::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;background:var(--line);}
+  .tl-item{position:relative;margin:0 0 16px;}
+  .tl-item::before{content:"";position:absolute;left:-24px;top:5px;width:10px;height:10px;border-radius:50%;
+    background:var(--accent);box-shadow:0 0 0 3px #e7f0f2;}
+  .tl-item.risk::before{background:var(--danger);box-shadow:0 0 0 3px #fbe6e4;}
+  .tl-date{font-size:12px;color:var(--muted);letter-spacing:.02em;}
+  .tl-txt{margin-top:2px;}
+  .note{background:#f0f6f8;border-left:3px solid var(--accent2);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px;}
+  .note.warn{background:#fdf3ec;border-left-color:var(--warn);}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  .box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;}
+  .box h4{margin:0 0 8px;font-size:14px;color:var(--ink);}
+  .box p,.box ul{font-size:13.5px;margin:6px 0;}
+  .box ul{padding-left:18px;}
+  .foot{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.8;}
+  code{background:#eef1f4;padding:1px 5px;border-radius:4px;font-size:12.5px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  @media (max-width:820px){
+    .cards{grid-template-columns:repeat(2,1fr);}
+    .grid2{grid-template-columns:1fr;}
+    .bar-row{grid-template-columns:110px 1fr 38px;}
+    h1{font-size:24px;}
+    header.hero{padding:40px 22px 34px;}
+    .page{padding:0 18px 48px;}
+  }
+  @media print{
+    body{background:#fff;font-size:11.5pt;}
+    header.hero{margin:0;padding:24px;background:#0f5f73 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    h2{page-break-after:avoid;} table,.box,.bar-wrap,.note{page-break-inside:avoid;}
+    .page{max-width:none;padding:0;}
+  }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="inner">
+    <div class="kicker">Certificate Lapse Analysis · 2026</div>
+    <h1>深圳樽耀系族资质证书失效原因分析报告</h1>
+    <p class="sub">围绕深圳樽耀建设集团及其 15 家关联主体，逐张核验证书状态，解析"为什么失效、是成本问题还是经营问题"，并给出可执行的核查与应对建议。</p>
+    <div class="meta">
+      <span>分析对象：16 家在营企业 + 6 家已注销 + 5 家个体户</span>
+      <span>证书记录：32 条（9 个主体持有）</span>
+      <span>数据截至：2026-10-30</span>
+      <span>数据来源：企查查资质证书库（T+1）</span>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <div class="lead">
+    <strong>核心结论</strong>
+    <ol>
+      <li><strong>不是维护成本高，而是续期资格不成立。</strong>安许证延期行政零收费，真正的门槛是在建项目、安全人员与现场核查；樽耀同期却花钱新办了食品经营许可与 ISO 三体系，唯独没续"免费但要干活"的安许证。</li>
+      <li><strong>"过期失效"与"撤销"性质不同。</strong>过期多为主动或被动放弃续期（樽耀、众盈安许、茶链食品证）；撤销是发证机构在有效期内主动取消（华荣建材 7 张、金通灵 1 张），后者反映质量或生产条件不达标，风险更高。</li>
+      <li><strong>证书失效是经营空转的结果与证据，不是原因。</strong>它与"零中标、参保从 43 降至 16、注册资本从 1 亿减回 4000 万"构成同一组收缩动作，时间上仅相隔一个月。</li>
+    </ol>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="num">32</div><div class="lbl">已披露证书记录（条）</div></div>
+    <div class="card"><div class="num">13</div><div class="lbl">明确处于"有效"状态</div></div>
+    <div class="card"><div class="num bad">8</div><div class="lbl">被"撤销"（有效期未满）</div></div>
+    <div class="card"><div class="num bad">6</div><div class="lbl">到期"过期失效"</div></div>
+  </div>
+
+  <h2>一、证书现状全景</h2>
+  <p>全家族仅 9 个主体持有证书，其余 13 个在营主体（铭樽、佩苏、云脉、恒聚、宇越、滴嫂、茶链汇创、比茶科技、5 家个体户等）<strong>零证书</strong>。可施工、可投标、可供货的能力高度集中在少数节点上。</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:22%">持有主体</th><th style="width:8%">证书数</th><th style="width:34%">核心证书</th><th style="width:18%">有效期至</th><th style="width:18%">状态</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>深圳樽耀建设集团</td><td>6</td><td>建筑工程施工总承包二级<br>安全生产许可证<br>质量/环境/职业健康三体系<br>食品经营许可证</td><td>2029-04-03<br>2026-08-25<br>2028-01-01<br>2029-12-24</td><td><span class="tag t-ok">5 有效</span> <span class="tag t-exp">安许过期</span></td></tr>
+      <tr><td>南通樽瑞建设集团</td><td>2</td><td>建筑装修装饰专业承包二级<br>安全生产许可证</td><td>2027-08-01<br>2028-11-20</td><td><span class="tag t-ok">2 有效</span></td></tr>
+      <tr><td>南通众盈建筑工程</td><td>2</td><td>建筑装修装饰二级<br>安全生产许可证</td><td>2027-12-12<br>2026-03-12</td><td><span class="tag t-ok">1 有效</span> <span class="tag t-exp">安许过期</span></td></tr>
+      <tr><td>南通诚志建筑配套</td><td>3</td><td>施工劳务资质<br>安全生产许可证<br>食品经营许可证</td><td>2029-06-02<br>2027-01-02<br>2018 发证</td><td><span class="tag t-ok">2 有效</span> <span class="tag t-exp">食品证过期</span></td></tr>
+      <tr><td>南通泓臻档案管理</td><td>2</td><td>劳务派遣经营许可证 ×2</td><td>2027-04-07</td><td><span class="tag t-ok">2 有效</span></td></tr>
+      <tr><td>海南恒博卓越</td><td>1</td><td>进出口货物收发货人备案</td><td>2099-12-31</td><td><span class="tag t-ok">有效</span></td></tr>
+      <tr><td>南通华荣建材科技</td><td>12</td><td>三体系 ×3、预制构件产品认证 ×4、排污登记等</td><td>原至 2026/2028</td><td><span class="tag t-rev">明确有效 0</span> <span class="tag t-rev">撤销 7</span></td></tr>
+      <tr><td>深圳茶链科技</td><td>2</td><td>食品经营许可证 ×2</td><td>2024-11-10 / 2025-04-25</td><td><span class="tag t-exp">2 过期</span></td></tr>
+      <tr><td>江苏金通灵储能</td><td>2</td><td>质量管理体系认证 ×2</td><td>2024-11-15 / 2021-11-15</td><td><span class="tag t-exp">1 过期</span> <span class="tag t-rev">1 撤销</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="bar-wrap">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:10px;">各主体"有效证书"数量对比</div>
+    <div class="bar-row"><span>深圳樽耀</span><div class="bar" style="width:100%"></div><span class="bar-val">5</span></div>
+    <div class="bar-row"><span>南通樽瑞</span><div class="bar" style="width:40%"></div><span class="bar-val">2</span></div>
+    <div class="bar-row"><span>南通诚志</span><div class="bar" style="width:40%"></div><span class="bar-val">2</span></div>
+    <div class="bar-row"><span>南通泓臻</span><div class="bar" style="width:40%"></div><span class="bar-val">2</span></div>
+    <div class="bar-row"><span>南通众盈</span><div class="bar" style="width:20%"></div><span class="bar-val">1</span></div>
+    <div class="bar-row"><span>海南恒博</span><div class="bar" style="width:20%"></div><span class="bar-val">1</span></div>
+    <div class="bar-row"><span>华荣建材</span><div class="bar zero" style="width:2%"></div><span class="bar-val">0</span></div>
+    <div class="bar-row"><span>茶链科技</span><div class="bar zero" style="width:2%"></div><span class="bar-val">0</span></div>
+    <div class="bar-row"><span>金通灵储能</span><div class="bar zero" style="width:2%"></div><span class="bar-val">0</span></div>
+  </div>
+
+  <h2>二、失效清单与逐项归因</h2>
+  <table>
+    <thead>
+      <tr><th style="width:20%">主体 / 证书</th><th style="width:12%">原到期日</th><th style="width:12%">当前状态</th><th style="width:56%">归因判断</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>樽耀 / 安全生产许可证</strong><br><span style="color:var(--muted);font-size:12px;">(粤)JZ安许证字[2023]029671</span></td>
+        <td>2026-08-25</td><td><span class="tag t-exp">过期失效</span></td>
+        <td>延期需提交在建工程清单、安全资金投入、ABC 三类人员与特种作业人员社保、无事故记录。樽耀成立至今公开渠道<strong>零中标</strong>、参保由 43 人降至 16 人，上述材料无法成立，属"无业务导致无法续期"，非成本问题。</td>
+      </tr>
+      <tr>
+        <td><strong>众盈 / 安全生产许可证</strong><br><span style="color:var(--muted);font-size:12px;">(苏)JZ安许证字[2023]001830</span></td>
+        <td>2026-03-12</td><td><span class="tag t-exp">过期失效</span></td>
+        <td>参保仅 1 人、零中标、开庭 47 次，主体已停摆，无在建项目可供核查，续期条件天然不成立。</td>
+      </tr>
+      <tr>
+        <td><strong>茶链科技 / 食品经营许可证 ×2</strong></td>
+        <td>2024-11 / 2025-04</td><td><span class="tag t-exp">过期失效</span></td>
+        <td>门店或经营场所不再符合条件，未申请延续；与建筑主业无关，属个人投资板块的自然退出。</td>
+      </tr>
+      <tr>
+        <td><strong>诚志 / 食品经营许可证</strong></td>
+        <td>2018 年发证</td><td><span class="tag t-exp">过期失效</span></td>
+        <td>与施工主业无关的边缘证照，未续办；不影响其施工劳务资质与安许的有效性。</td>
+      </tr>
+      <tr>
+        <td><strong>金通灵储能 / 质量体系（2021 证）</strong></td>
+        <td>2024-11-15</td><td><span class="tag t-exp">过期失效</span></td>
+        <td>企业于 2025 年 8 月进入破产程序（(2025)苏0602破50号），人员流失、无监督审核，证书自然过期。</td>
+      </tr>
+      <tr>
+        <td><strong>华荣建材 / 三体系 ×3</strong><br><span style="color:var(--muted);font-size:12px;">U919123Q/E/S…</span></td>
+        <td>原至 2026-11-10</td><td><span class="tag t-rev">撤销</span></td>
+        <td>2023-11 发证，未满 3 年即被撤销，说明<strong>监督审核未通过</strong>或企业主动终止认证，非单纯未年审。</td>
+      </tr>
+      <tr>
+        <td><strong>华荣建材 / 预制构件产品认证 ×4</strong><br><span style="color:var(--muted);font-size:12px;">CABR-01(02)-(2023)-CGP-141-01~04</span></td>
+        <td>原至 2028-06-08</td><td><span class="tag t-rev">撤销</span></td>
+        <td>覆盖预制梁、预制柱、叠合板/墙板、预制阳台。产品认证与生产线、质量体系绑定，撤销通常对应<strong>产线停产、抽检不合格或条件不再满足</strong>。</td>
+      </tr>
+      <tr>
+        <td><strong>金通灵储能 / 质量体系（2018 证）</strong></td>
+        <td>2021-11-15</td><td><span class="tag t-rev">撤销</span></td>
+        <td>早期证书被撤销，与后续经营恶化、破产进程一致。</td>
+      </tr>
+      <tr>
+        <td>恒博 / 进出口收发货人备案</td>
+        <td>2099-12-31</td><td><span class="tag t-ok">有效</span></td>
+        <td>2025-09 新备案，长期有效，仅需年度报告，属正常维护。</td>
+      </tr>
+      <tr>
+        <td>泓臻 / 劳务派遣许可 ×2</td>
+        <td>2027-04-07</td><td><span class="tag t-ok">有效</span></td>
+        <td>需 200 万实缴、固定场所、年度报告，持续维护中，说明该主体仍在正常运营。</td>
+      </tr>
+      <tr>
+        <td>樽耀 / 三体系、食品许可</td>
+        <td>2028-01-01 / 2029-12-24</td><td><span class="tag t-ok">有效</span></td>
+        <td>2024-12 与 2025-01 新办，均为"存在即可取得"的证照，与是否施工无关。</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>三、四类证书的续期机制</h2>
+  <p>证书失效并非统一规则。行政许可、企业资质、体系认证、备案类证照的"续命"逻辑差异极大，这决定了同样"没做生意"，有的证自动失效、有的证长期有效。</p>
+
+  <table>
+    <thead>
+      <tr><th style="width:18%">证书类型</th><th style="width:12%">有效期</th><th style="width:32%">续期核心条件</th><th style="width:38%">失效机制</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>安全生产许可证</strong></td><td>3 年</td>
+        <td>在建项目清单、安全投入凭证、ABC 三类人员、特种作业人员、社保缴纳、无重大事故、现场核查</td>
+        <td>到期前 3 个月申请延期，逾期不予补办；条件不符即失效。<strong>行政零收费，但"有活才能续"</strong></td>
+      </tr>
+      <tr>
+        <td><strong>建筑业企业资质</strong></td><td>5 年</td>
+        <td>净资产、注册建造师、技术负责人、<strong>近 5 年工程业绩</strong></td>
+        <td>到期前 3 个月申请延续，业绩或人员不达标则不予延续；无业绩企业难以延续</td>
+      </tr>
+      <tr>
+        <td><strong>ISO 三体系认证</strong></td><td>3 年</td>
+        <td><strong>每年监督审核</strong>（年审）、第 3 年再认证；费用约 1–3 万元/年/体系</td>
+        <td>不年审→暂停→6 个月内未恢复→撤销；审核不通过或产品不合格→直接撤销</td>
+      </tr>
+      <tr>
+        <td><strong>食品经营 / 劳务派遣 / 进出口备案</strong></td><td>5 年 / 3 年 / 长期</td>
+        <td>场所、健康证、实缴资本、管理制度、年度报告</td>
+        <td>未年报、场所失效、条件不符→过期或失效；备案类仅需年报即可长期有效</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>机制要点：</strong>"没有经营活动"对不同证书的作用完全不同。对安许证和建筑业资质，无项目、无人员、无业绩会<strong>直接导致续期不能</strong>；对体系认证，不年审即被暂停乃至撤销；对备案类（如进出口收发货人），只要按时年报，即使没有业务也可长期有效。因此"证书过期"必须结合证书类型解读，不能一概而论。
+  </div>
+
+  <h2>四、"维护成本高"假说的反证</h2>
+  <p>如果失效源于成本，就无法解释樽耀在临近到期前后的取舍：<strong>能花钱办的新证都办了，唯独没续那张不收费的证。</strong></p>
+
+  <table>
+    <thead>
+      <tr><th style="width:16%">时间</th><th style="width:38%">动作</th><th style="width:22%">花费性质</th><th style="width:24%">含义</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>2024-12-25</td><td>新办食品经营许可证</td><td>有行政与场地成本</td><td>企业"存在"即可办理，与施工无关</td></tr>
+      <tr><td>2025-01-02</td><td>新办 ISO 质量/环境/职业健康三体系</td><td>约 1–3 万元/年</td><td>愿意为"形象与投标加分"付费</td></tr>
+      <tr><td>2026-07-09</td><td>注册资本由 1 亿减回 4000 万</td><td>—</td><td>主动收缩，注销未实缴认缴额</td></tr>
+      <tr><td>2026-08-25</td><td>安许证到期，<strong>未续</strong></td><td><strong>行政零收费</strong></td><td>续期门槛是人员与项目，而非钱</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note warn">
+    <strong>成本量级测算：</strong>三体系年审约 1–3 万元/年，对一家实缴 4000 万元的企业不足千分之一；安许延期本身不收费。真正的成本是<strong>为满足续期条件而必须保留的安全管理人员社保、在建项目安全投入与现场整改</strong>——这部分支出只有在"有业务"时才划算。没有业务，续证就是纯负担，于是选择不续。
+  </div>
+
+  <h2>五、时间线：一次连续的收缩决策</h2>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-date">2023-08-25</div><div class="tl-txt">取得安全生产许可证（粤 JZ 安许证字[2023]029671），具备开工前置条件。</div></div>
+    <div class="tl-item"><div class="tl-date">2024-04-03</div><div class="tl-txt">取得建筑工程施工总承包二级（D244725563），全家族唯一总包资质。</div></div>
+    <div class="tl-item"><div class="tl-date">2024-06-20</div><div class="tl-txt">唯一一次公开投标：罗湖翠竹街道两个小项目，仅停留在"资格审查结果公示"，无中标记录。</div></div>
+    <div class="tl-item"><div class="tl-date">2024-09-30</div><div class="tl-txt">注册资本由 4000 万增至 1 亿，朱敏任董事——扩张意图明显。</div></div>
+    <div class="tl-item"><div class="tl-date">2024-12-25 / 2025-01-02</div><div class="tl-txt">新办食品经营许可与 ISO 三体系，仍在对"投标形象"投入。</div></div>
+    <div class="tl-item"><div class="tl-date">2026-05-25</div><div class="tl-txt">安许延期申请窗口开启（到期前 3 个月），未见延期公示。</div></div>
+    <div class="tl-item risk"><div class="tl-date">2026-07-09</div><div class="tl-txt">注册资本由 1 亿减回 4000 万（-6000 万），收缩信号确立。</div></div>
+    <div class="tl-item risk"><div class="tl-date">2026-08-25</div><div class="tl-txt">安许证到期失效，总包业务失去合法开工条件。</div></div>
+    <div class="tl-item risk"><div class="tl-date">2026-10-23</div><div class="tl-txt">耿美英受让南通诚志 20% 股权，资源向"真正中标的主体"集中。</div></div>
+  </div>
+
+  <p>减资与安许失效仅相隔一个月，且此后实控人将股权向诚志（唯一有中标记录、施工劳务资质与有效安许的主体）集中。三者指向同一判断：<strong>放弃"总包壳"的维持成本，把资源收缩到能实际产生收入的劳务与材料环节。</strong></p>
+
+  <h2>六、三种失效性质与风险含义</h2>
+  <div class="grid2">
+    <div class="box">
+      <h4><span class="tag t-exp">过期失效</span> — 到期未续</h4>
+      <p>含义：企业未在到期前申请，或申请未获通过。多为主动放弃或条件不足。</p>
+      <ul>
+        <li>本案：樽耀安许、众盈安许、茶链食品证、诚志食品证、金通灵 2021 体系证</li>
+        <li>风险等级：中。可恢复——补齐人员与项目后可重新申请</li>
+        <li>对合作的影响：当前不具备相应施工/经营资格，签约即存在合规瑕疵</li>
+      </ul>
+    </div>
+    <div class="box">
+      <h4><span class="tag t-rev">撤销</span> — 有效期内被取消</h4>
+      <p>含义：发证机构在有效期内主动取消，通常因监督审核不通过、产品抽检不合格、停产或违规。</p>
+      <ul>
+        <li>本案：华荣建材 7 张（三体系 + 4 张预制构件产品认证）、金通灵 1 张</li>
+        <li>风险等级：<strong>高</strong>。指向质量或生产条件曾出现问题，非程序性疏漏</li>
+        <li>对合作的影响：其在无有效认证状态下供货（2025-01 仍中标 PC 板采购），质量责任与验收风险上升</li>
+      </ul>
+    </div>
+  </div>
+  <div class="box">
+    <h4><span class="tag t-na">零证书</span> — 从未取得或无需取得</h4>
+    <p>含义：主体本身不从事需持证的经营活动，多为持股平台、投资载体、采购通道。</p>
+    <ul>
+      <li>本案：铭樽（持股平台）、佩苏/云脉（科技壳）、恒聚（设备租赁，法规未强制许可）、宇越（贸易）、滴嫂（餐饮管理）、茶链汇创（LP 载体）、5 家建材经营部（个体采购通道）</li>
+      <li>风险等级：低（本身合规），但若承接需持证业务即构成无证经营</li>
+    </ul>
+  </div>
+
+  <h2>七、失效原因归因模型</h2>
+  <p>把 6 张"过期"与 8 张"撤销"合并归因，可收敛为四类根因，按本案权重排序：</p>
+  <table>
+    <thead>
+      <tr><th style="width:8%">排序</th><th style="width:26%">根因</th><th style="width:34%">作用机制</th><th style="width:32%">本案对应</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td><strong>无在建项目</strong></td><td>安许延期需项目清单与安全投入，无项目则材料不成立</td><td>樽耀、众盈</td></tr>
+      <tr><td>2</td><td><strong>人员与社保萎缩</strong></td><td>参保 43→16，ABC 三类人员与特种作业人员不足，无法通过核查</td><td>樽耀、众盈、金通灵（参保 2 人）</td></tr>
+      <tr><td>3</td><td><strong>停产/产线条件不满足</strong></td><td>产品认证与生产线绑定，停产即撤销；体系审核不通过即撤销</td><td>华荣建材 7 张</td></tr>
+      <tr><td>4</td><td><strong>主动收缩与主体退出</strong></td><td>减资、破产、业务关停后不再投入维护成本</td><td>樽耀（减资后不续安许）、金通灵（破产）、茶链（关店）</td></tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <strong>结论性判断：</strong>成本是"第四位的边缘因素"，居前三位的都是<strong>经营事实</strong>——没有项目、没有人员、没有生产。换言之，证书失效不是企业"养不起证"，而是企业"没有资格再养"。
+  </div>
+
+  <h2>八、核查清单与应对建议</h2>
+  <table>
+    <thead>
+      <tr><th style="width:6%">#</th><th style="width:28%">核查事项</th><th style="width:32%">渠道 / 材料</th><th style="width:34%">目的</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1</td><td>安许延期申请记录</td><td>广东省住建厅"安全生产许可证延期"公示、企业受理回执</td><td>区分"未申请"与"申请被驳回"，判断是放弃还是条件不足</td></tr>
+      <tr><td>2</td><td>华荣 7 张证书撤销原因</td><td>全国认证认可信息公共服务平台（输入证书编号查撤销日期与原因代码）</td><td>确认是审核不通过、抽检不合格还是停产退出</td></tr>
+      <tr><td>3</td><td>2025-01 PC 板供货合规性</td><td>中铁十九局采购合同、供货批次检测报告</td><td>评估无有效认证供货的质量责任归属</td></tr>
+      <tr><td>4</td><td>众盈 2026-03 后是否仍在施工</td><td>住建部门动态核查公告、项目现场照片</td><td>判断是否存在无证施工的行政处罚风险</td></tr>
+      <tr><td>5</td><td>泓臻向樽耀/樽瑞派遣人数</td><td>劳务派遣协议、社保缴纳明细</td><td>核实"16 人参保"是否为管理班子，现场工人是否由派遣补充</td></tr>
+      <tr><td>6</td><td>樽耀与诚志的合同链</td><td>总包合同、劳务分包合同、甲方书面同意文件</td><td>识别"总包中标—劳务分包—实际施工"是否构成违法转分包</td></tr>
+    </tbody>
+  </table>
+
+  <h3>对合作方的三条实操建议</h3>
+  <div class="box">
+    <ul>
+      <li><strong>若需其承担深圳本地施工：</strong>在安许续期完成前，不得以樽耀名义签约开工；可要求出具续期受理回执，或改由持有效安许的樽瑞（限装饰）、诚志（限劳务）承接对应范围。</li>
+      <li><strong>若需借其资质投标：</strong>总包二级虽有效，但安许过期将导致投标文件被否决或中标后无法办理施工许可，须先完成续期。</li>
+      <li><strong>若采购其材料（华荣建材）：</strong>要求提供撤销后重新取得的产品认证或第三方检测报告，并在合同中约定质量连带责任与退换条款。</li>
+    </ul>
+  </div>
+
+  <h2>九、最终结论</h2>
+  <p>樽耀系族的证书失效，是一次<strong>由经营萎缩驱动的系统性退出</strong>，而非单点疏忽或成本压力：</p>
+  <table>
+    <thead><tr><th style="width:26%">判断项</th><th style="width:74%">结论</th></tr></thead>
+    <tbody>
+      <tr><td>是否因维护成本高</td><td><strong>否</strong>。安许续期零收费，三体系年费仅 1–3 万元；企业同期仍为新证付费</td></tr>
+      <tr><td>是否因无经营自动失效</td><td><strong>是，且是主因</strong>。无项目、无人员、无安全投入 → 续期条件不成立 → 到期失效</td></tr>
+      <tr><td>"撤销"如何解释</td><td>非"过期"，而是有效期内被取消，指向质量/生产条件问题，性质更重（华荣 7 张）</td></tr>
+      <tr><td>对樽耀的核心影响</td><td>全家族唯一总包资质 + 安许过期 = <strong>当前不具备合法总包施工资格</strong></td></tr>
+      <tr><td>真实业务落点</td><td>南通诚志（施工劳务 + 有效安许，4 个项目约 700 万元）与华荣建材（材料供应）</td></tr>
+      <tr><td>建议动作</td><td>先核安许续期与华荣撤销原因，再谈合作；合同中要求实控人担保与关联交易披露</td></tr>
+    </tbody>
+  </table>
+
+  <div class="foot">
+    <strong>数据说明：</strong>本报告基于企查查资质证书库（T+1 更新）于 2026-10-30 的查询结果，覆盖深圳樽耀及其 15 家关联在营主体、6 家已注销主体、5 家个体工商户；证书记录共 32 条，其中华荣建材 12 条中有 5 条状态未在接口中明示，故以"明确有效 0 条、已核撤销 7 条"表述。<br>
+    <strong>口径提示：</strong>"过期失效""撤销"为登记状态字段，含义依证书类型而定；安许延期、资质延续的具体审批结果以住建主管部门公示为准。报告中关于归因的判断属基于证书类型规则与经营数据的合理推断，非发证机关的官方认定，正式尽调应以主管部门回执与认证机构证明为准。<br>
+    生成时间：2026-10-30 · 仅供内部决策参考
+  </div>
+</div>
+</body>
+</html>
